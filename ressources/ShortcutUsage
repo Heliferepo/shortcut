@@ -1,0 +1,22 @@
+Usage: . shortcut <option>
+       source shortcut <option>
+
+Create shortcuts in one's machine to move faster through directories
+
+At least one argument must be given
+
+Options:
+	-h --help
+		Prints the usage
+
+	-l --list
+		Lists available shortcuts
+
+	-s --set	<name>
+		Sets a shortcut to your current directory and sets its *name*
+
+	-r --remove	<name>
+		Removes the shortcut *name*
+
+	-g --goto	<name> <additional path>
+		Go to the shortcut *name*

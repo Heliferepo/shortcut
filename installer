@@ -1,0 +1,28 @@
+#!/bin/sh
+
+if [[ $1 == "zsh" ]]
+then
+    echo -e "\nexport PATH=\$PATH:~/.bin\nexport SHORTCUTPATH=\"/home/\$(whoami)/.bin/shortcut/shortcut\"\nalias shortcut='. \$SHORTCUTPATH'\nalias goto='. \$SHORTCUTPATH -g'\nalias setdest='. \$SHORTCUTPATH -s'\nalias rmdest='. \$SHORTCUTPATH -r'\nalias ldest='. \$SHORTCUTPATH -l'\nalias copyf='. \$SHORTCUTPATH -c'" >> /home/$(whoami)/.zshrc
+elif [[ $1 == "bash" ]]
+then
+    echo -e "\n\export PATH=\$PATH:~/.bin\nexport SHORTCUTPATH=\"/home/\$(whoami)/.bin/shortcut/shortcut\"\nalias shortcut='. \$SHORTCUTPATH'\nalias goto='. \$SHORTCUTPATH -g'\nalias setdest='. \$SHORTCUTPATH -s'\nalias rmdest='. \$SHORTCUTPATH -r'\nalias ldest='. \$SHORTCUTPATH -l'\nalias copyf='. \$SHORTCUTPATH -c'" >> /home/$(whoami)/.bashrc
+else
+    echo "Missing first argument ('zsh' or 'bash')"
+    exit
+fi
+
+if [ ! -d /home/$(whoami)/.bin ]
+then
+    mkdir /home/$(whoami)/.bin
+    mkdir /home/$(whoami)/.bin/shortcut
+elif [ ! -d /home/$(whoami)/.bin/shortcut ]
+then
+    mkdir /home/$(whoami)/.bin/shortcut
+fi
+
+cp source ressources /home/$(whoami)/.bin/shortcut
+
+if [[ $2 == "-R" ]]
+then
+    rm -rf ../shortcut
+fi
