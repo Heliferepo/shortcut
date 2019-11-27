@@ -2,10 +2,18 @@
 
 if [[ $1 == "zsh" ]]
 then
-    echo -e "\nexport PATH=\$PATH:~/.bin\nexport SHORTCUTPATH=\"/home/\$(whoami)/.bin/shortcut/shortcut\"\nalias shortcut='. \$SHORTCUTPATH'\nalias goto='. \$SHORTCUTPATH -g'\nalias setdest='. \$SHORTCUTPATH -s'\nalias rmdest='. \$SHORTCUTPATH -r'\nalias ldest='. \$SHORTCUTPATH -l'\nalias copyf='. \$SHORTCUTPATH -c'" >> /home/$(whoami)/.zshrc
+    if [[ -z "$SHORTCUTPATH" ]]
+    then
+        echo -e "\nexport PATH=\$PATH:~/.bin\nexport SHORTCUTPATH=\"/home/\$(whoami)/.bin/shortcut/shortcut\"\nalias shortcut='. \$SHORTCUTPATH'\nalias goto='. \$SHORTCUTPATH -g'\nalias setdest='. \$SHORTCUTPATH -s'\nalias rmdest='. \$SHORTCUTPATH -r'\nalias ldest='. \$SHORTCUTPATH -l'\nalias copyf='. \$SHORTCUTPATH -c'" >> /home/$(whoami)/.zshrc
+    fi
+    cp source/shortcut.zsh /home/$(whoami)/.bin/shortcut/shortcut
 elif [[ $1 == "bash" ]]
 then
-    echo -e "\n\export PATH=\$PATH:~/.bin\nexport SHORTCUTPATH=\"/home/\$(whoami)/.bin/shortcut/shortcut\"\nalias shortcut='. \$SHORTCUTPATH'\nalias goto='. \$SHORTCUTPATH -g'\nalias setdest='. \$SHORTCUTPATH -s'\nalias rmdest='. \$SHORTCUTPATH -r'\nalias ldest='. \$SHORTCUTPATH -l'\nalias copyf='. \$SHORTCUTPATH -c'" >> /home/$(whoami)/.bashrc
+    if [[ -z "$SHORTCUTPATH" ]]
+    then
+        echo -e "\nexport PATH=\$PATH:~/.bin\nexport SHORTCUTPATH=\"/home/\$(whoami)/.bin/shortcut/shortcut\"\nalias shortcut='. \$SHORTCUTPATH'\nalias goto='. \$SHORTCUTPATH -g'\nalias setdest='. \$SHORTCUTPATH -s'\nalias rmdest='. \$SHORTCUTPATH -r'\nalias ldest='. \$SHORTCUTPATH -l'\nalias copyf='. \$SHORTCUTPATH -c'" >> /home/$(whoami)/.bashrc
+    fi
+    cp source/shortcut.bash /home/$(whoami)/.bin/shortcut/shortcut
 else
     echo "Missing first argument ('zsh' or 'bash')"
     exit
@@ -20,7 +28,7 @@ then
     mkdir /home/$(whoami)/.bin/shortcut
 fi
 
-cp -r source/shortcut ressources /home/$(whoami)/.bin/shortcut
+cp -r ressources /home/$(whoami)/.bin/shortcut
 
 if [[ $2 == "-R" ]]
 then
