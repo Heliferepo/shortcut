@@ -20,7 +20,7 @@ then
     mkdir /home/$(whoami)/.bin/shortcut
 fi
 
-cp source ressources /home/$(whoami)/.bin/shortcut
+cp -r source ressources /home/$(whoami)/.bin/shortcut
 
 if [[ $2 == "-R" ]]
 then
