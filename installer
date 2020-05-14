@@ -1,5 +1,11 @@
 #!/bin/sh
 
+if [ 'whoami' == "root"]
+then
+    echo "Please do not run as root directly"
+    exit
+fi
+
 if [[ $1 == "zsh" ]]
 then
     if [[ -z "$SHORTCUTPATH" ]]
@@ -34,3 +40,7 @@ if [[ $2 == "-R" ]]
 then
     rm -rf ../shortcut
 fi
+
+sudo cp shortcut.8.gz /usr/share/\man/man8
+
+echo -e "shortcut successfully installed\n shortcut -h or man shortcut to get info"
