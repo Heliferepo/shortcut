@@ -6,14 +6,14 @@ then
     exit
 fi
 
-if [[ $0 == "zsh" ]]
+if [[ $SHELL == usr/bin/zsh ]]
 then
     if [[ -z "$SHORTCUTPATH" ]]
     then
         echo -e "\nexport PATH=\$PATH:~/.bin\nexport SHORTCUTPATH=\"/home/\$(whoami)/.bin/shortcut/shortcut\"\nalias shortcut='. \$SHORTCUTPATH'\nalias goto='. \$SHORTCUTPATH -g'\nalias setdest='. \$SHORTCUTPATH -s'\nalias rmdest='. \$SHORTCUTPATH -r'\nalias ldest='. \$SHORTCUTPATH -l'\nalias copyf='. \$SHORTCUTPATH -c'" >> /home/$(whoami)/.zshrc
     fi
     cp source/shortcut.zsh /home/$(whoami)/.bin/shortcut/shortcut
-elif [[ $0 == "bash" ]]
+elif [[ $SHELL == usr/bin/bash ]]
 then
     if [[ -z "$SHORTCUTPATH" ]]
     then
@@ -21,7 +21,7 @@ then
     fi
     cp source/shortcut.bash /home/$(whoami)/.bin/shortcut/shortcut
 else
-    echo "Shell might not be supported ('zsh' or 'bash' required)"
+    echo -e "Shell might not be supported ('zsh' or 'bash' required)\nActual main shell is : $SHELL"
     exit
 fi
 
