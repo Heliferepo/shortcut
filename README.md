@@ -31,7 +31,6 @@ sudo snap install git
 ```
 #### Install the app
 
-When git is installed :
 
 ```sh
 git clone https://github.com/DregniSlovra/shortcut.git
