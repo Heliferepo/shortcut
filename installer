@@ -1,27 +1,8 @@
 #!/bin/sh
 
-if [ 'whoami' == "root"]
+if [ 'whoami' == "root" ]
 then
     echo "Please do not run as root directly"
-    exit
-fi
-
-if [[ $SHELL == /usr/bin/zsh ]]
-then
-    if [[ -z "$SHORTCUTPATH" ]]
-    then
-        echo -e "\nexport PATH=\$PATH:~/.bin\nexport SHORTCUTPATH=\"/home/\$(whoami)/.bin/shortcut/shortcut\"\nalias shortcut='. \$SHORTCUTPATH'\nalias goto='. \$SHORTCUTPATH -g'\nalias setdest='. \$SHORTCUTPATH -s'\nalias rmdest='. \$SHORTCUTPATH -r'\nalias ldest='. \$SHORTCUTPATH -l'\nalias copyf='. \$SHORTCUTPATH -c'" >> /home/$(whoami)/.zshrc
-    fi
-    cp source/shortcut.zsh /home/$(whoami)/.bin/shortcut/shortcut
-elif [[ $SHELL == /usr/bin/bash ]]
-then
-    if [[ -z "$SHORTCUTPATH" ]]
-    then
-        echo -e "\nexport PATH=\$PATH:~/.bin\nexport SHORTCUTPATH=\"/home/\$(whoami)/.bin/shortcut/shortcut\"\nalias shortcut='. \$SHORTCUTPATH'\nalias goto='. \$SHORTCUTPATH -g'\nalias setdest='. \$SHORTCUTPATH -s'\nalias rmdest='. \$SHORTCUTPATH -r'\nalias ldest='. \$SHORTCUTPATH -l'\nalias copyf='. \$SHORTCUTPATH -c'" >> /home/$(whoami)/.bashrc
-    fi
-    cp source/shortcut.bash /home/$(whoami)/.bin/shortcut/shortcut
-else
-    echo -e "Shell might not be supported ('zsh' or 'bash' required)\nActual main shell is : $SHELL"
     exit
 fi
 
@@ -34,9 +15,28 @@ then
     mkdir /home/$(whoami)/.bin/shortcut
 fi
 
+if [[ $1 == "zsh" ]]
+then
+    if [[ -z "$SHORTCUTPATH" ]]
+    then
+        echo -e "\nexport PATH=\$PATH:~/.bin\nexport SHORTCUTPATH=\"/home/\$(whoami)/.bin/shortcut/shortcut\"\nalias shortcut='. \$SHORTCUTPATH'\nalias goto='. \$SHORTCUTPATH -g'\nalias setdest='. \$SHORTCUTPATH -s'\nalias rmdest='. \$SHORTCUTPATH -r'\nalias ldest='. \$SHORTCUTPATH -l'\nalias copyf='. \$SHORTCUTPATH -c'" >> /home/$(whoami)/.zshrc
+    fi
+    cp source/shortcut.zsh /home/$(whoami)/.bin/shortcut/shortcut
+elif [[ $1 == "bash" ]]
+then
+    if [[ -z "$SHORTCUTPATH" ]]
+    then
+        echo -e "\nexport PATH=\$PATH:~/.bin\nexport SHORTCUTPATH=\"/home/\$(whoami)/.bin/shortcut/shortcut\"\nalias shortcut='. \$SHORTCUTPATH'\nalias goto='. \$SHORTCUTPATH -g'\nalias setdest='. \$SHORTCUTPATH -s'\nalias rmdest='. \$SHORTCUTPATH -r'\nalias ldest='. \$SHORTCUTPATH -l'\nalias copyf='. \$SHORTCUTPATH -c'" >> /home/$(whoami)/.bashrc
+    fi
+    cp source/shortcut.bash /home/$(whoami)/.bin/shortcut/shortcut
+else
+    echo -e "Please put your current shell as an argument ('zsh' or 'bash' required)"
+    exit
+fi
+
 cp -r ressources /home/$(whoami)/.bin/shortcut
 
-if [[ $1 == "-R" ]]
+if [[ $2 == "-R" ]]
 then
     rm -rf ../shortcut
 fi
