@@ -21,7 +21,7 @@ then
     fi
     cp source/shortcut.bash /home/$(whoami)/.bin/shortcut/shortcut
 else
-    echo "Missing first argument ('zsh' or 'bash')"
+    echo "Shell might not be supported ('zsh' or 'bash' required)"
     exit
 fi
 
