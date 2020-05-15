@@ -41,6 +41,6 @@ then
     rm -rf ../shortcut
 fi
 
-sudo cp shortcut.8.gz /usr/share/\man/man8
+sudo cp shortcut.1.gz /usr/share/\man/man1
 
-echo -e "shortcut successfully installed\n shortcut -h or man shortcut to get info"
+echo -e "shortcut successfully installed\nshortcut -h or man shortcut to get info"
