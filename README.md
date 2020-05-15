@@ -1,11 +1,11 @@
 # shortcut
 Lay shotcut to go back to a directory quiclky
 
-# Info
+### Info
 
 ZSH is much better in order to change $PATH variables so it would be recommended to use it 
 
-# Installation
+### Installation
 
 If you already have git :
 
