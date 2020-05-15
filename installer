@@ -1,13 +1,19 @@
 #!/bin/sh
 
-if [[ $1 == "zsh" ]]
+if [ 'whoami' == "root"]
+then
+    echo "Please do not run as root directly"
+    exit
+fi
+
+if [[ $SHELL == /usr/bin/zsh ]]
 then
     if [[ -z "$SHORTCUTPATH" ]]
     then
         echo -e "\nexport PATH=\$PATH:~/.bin\nexport SHORTCUTPATH=\"/home/\$(whoami)/.bin/shortcut/shortcut\"\nalias shortcut='. \$SHORTCUTPATH'\nalias goto='. \$SHORTCUTPATH -g'\nalias setdest='. \$SHORTCUTPATH -s'\nalias rmdest='. \$SHORTCUTPATH -r'\nalias ldest='. \$SHORTCUTPATH -l'\nalias copyf='. \$SHORTCUTPATH -c'" >> /home/$(whoami)/.zshrc
     fi
     cp source/shortcut.zsh /home/$(whoami)/.bin/shortcut/shortcut
-elif [[ $1 == "bash" ]]
+elif [[ $SHELL == /usr/bin/bash ]]
 then
     if [[ -z "$SHORTCUTPATH" ]]
     then
@@ -15,7 +21,7 @@ then
     fi
     cp source/shortcut.bash /home/$(whoami)/.bin/shortcut/shortcut
 else
-    echo "Missing first argument ('zsh' or 'bash')"
+    echo -e "Shell might not be supported ('zsh' or 'bash' required)\nActual main shell is : $SHELL"
     exit
 fi
 
@@ -30,7 +36,11 @@ fi
 
 cp -r ressources /home/$(whoami)/.bin/shortcut
 
-if [[ $2 == "-R" ]]
+if [[ $1 == "-R" ]]
 then
     rm -rf ../shortcut
 fi
+
+sudo cp shortcut.1.gz /usr/share/\man/man1
+
+echo -e "shortcut successfully installed\nshortcut -h or man shortcut to get info"
