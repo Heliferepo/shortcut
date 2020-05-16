@@ -1,4 +1,47 @@
 #!/bin/sh
+function devinfo {
+    echo -e "\nThis project was initiated by DregniSlovra : https://github.com/DregniSlovra"
+    echo -e "\nContributors:\nHelife : https://github.com/Heliferepo"
+    echo -e "\nIf you have an issue with shortcut please open an issue in : https://github.com/DregniSlovra/shortcut/issues"
+    echo -e "\nThank you for installing our script"
+}
+
+function ask {
+    local prompt reply default
+    prompt="y/n"
+    default="y"
+    while true; do
+      echo -n "$1 [$prompt] "
+        read -n1 reply </dev/tty
+        if [ -z "$reply" ]; then
+            reply=$default
+        fi
+        case "$reply" in
+            Y*|y*) return 0 ;;
+            N*|n*) return 1 ;;
+            *) echo "Please type [Y]es or [N]o"
+        esac
+    done
+}
+
+function choseshell {
+    local n
+    echo "Here are the differents compatible shells aviable"
+    echo "0) Abort"
+    echo "1) bash"
+    echo "2) ksh"
+    echo "3) zsh"
+
+    echo -n "Your choice : "
+    read -n1 n </dev/tty
+    case $n in
+        0) echo -e "\nYou aborted" && exit;;
+        1) SHELLCHOSEN=/home/$(whoami)/.bashrc && echo -e "\nYou have chosen the bash shell";;
+        2) SHELLCHOSEN=/home/$(whoami)/.kshrc && echo -e "\nYou have chosen the ksh shell";;
+        3) SHELLCHOSEN=/home/$(whoami)/.zshrc && echo -e "\nYou have chosen the Z shell";;
+        *) echo -e "\nNot a choice considered as aborted" && exit
+    esac
+}
 
 if [ 'whoami' == "root" ]
 then
@@ -6,104 +49,66 @@ then
     exit
 fi
 
-<<<<<<< HEAD
-if [[ $SHELL == /usr/bin/zsh ]]
-then
-    if [[ -z "$SHORTCUTPATH" ]]
-    then
-        echo -e "\nexport PATH=\$PATH:~/.bin\nexport SHORTCUTPATH=\"/home/\$(whoami)/.bin/shortcut/shortcut\"\nalias shortcut='. \$SHORTCUTPATH'\nalias goto='. \$SHORTCUTPATH -g'\nalias setdest='. \$SHORTCUTPATH -s'\nalias rmdest='. \$SHORTCUTPATH -r'\nalias ldest='. \$SHORTCUTPATH -l'\nalias copyf='. \$SHORTCUTPATH -c'" >> /home/$(whoami)/.zshrc
-    fi
-    cp source/shortcut.zsh /home/$(whoami)/.bin/shortcut/shortcut
-elif [[ $SHELL == /usr/bin/bash ]]
-then
-    if [[ -z "$SHORTCUTPATH" ]]
-    then
-        echo -e "\nexport PATH=\$PATH:~/.bin\nexport SHORTCUTPATH=\"/home/\$(whoami)/.bin/shortcut/shortcut\"\nalias shortcut='. \$SHORTCUTPATH'\nalias goto='. \$SHORTCUTPATH -g'\nalias setdest='. \$SHORTCUTPATH -s'\nalias rmdest='. \$SHORTCUTPATH -r'\nalias ldest='. \$SHORTCUTPATH -l'\nalias copyf='. \$SHORTCUTPATH -c'" >> /home/$(whoami)/.bashrc
-    fi
-    cp source/shortcut.bash /home/$(whoami)/.bin/shortcut/shortcut
-else
-    echo -e "Shell might not be supported ('zsh' or 'bash' required)\nActual main shell is : $SHELL"
-    exit
-fi
+choseshell
+
+echo -e "\nInstallation of shortcut initiated"
 
 if [ ! -d /home/$(whoami)/.bin ]
 then
     mkdir /home/$(whoami)/.bin
     mkdir /home/$(whoami)/.bin/shortcut
+    echo -e "\nCreated direcotry /home/$(whoami)/.bin"
+    echo -e "\nCreated direcotry /home/$(whoami)/.bin/shortcut"
+
 elif [ ! -d /home/$(whoami)/.bin/shortcut ]
 then
     mkdir /home/$(whoami)/.bin/shortcut
+    echo -e "\nCreated directory /home/$(whoami)/.bin/shortcut"
 fi
+
+if [[ -z "$SHORTCUTPATH" ]]
+then
+    echo -e "\n#shortcut configuration !\n" >> $SHELLCHOSEN
+
+    echo "if [[ ! \":\$PATH:\" == *\":~/.bin:\"* ]];" >> $SHELLCHOSEN
+    echo "then" >> $SHELLCHOSEN
+    echo -e "\texport PATH=~/.bin:\$PATH" >> $SHELLCHOSEN
+    echo "fi" >> $SHELLCHOSEN
+
+    echo -e "\nShortcut intiliased to the \$PATH variable"
+
+    echo -e "\nif [[ ! \":\$SHORTCUTPATH:\" == *\":/home/\$(whoami)/.bin/shortcut/shortcut:\"* ]];" >> $SHELLCHOSEN
+    echo "then" >> $SHELLCHOSEN
+    echo -e "\texport SHORTCUTPATH=\"/home/\$(whoami)/.bin/shortcut/shortcut\"" >> $SHELLCHOSEN
+    echo "fi" >> $SHELLCHOSEN
+
+    echo -e "\n\$SHORTCUT intiliased as /home/$(whoami)/.bin/shortcut/shortcut\n"
+
+    if ask "Do you want the premade aliases ? They are pretty recommended"
+    then
+        echo -e "\n\nAdding aliases..."
+        echo -e "\nalias shortcut='. \$SHORTCUTPATH'\nalias goto='. \$SHORTCUTPATH -g'\nalias setdest='. \$SHORTCUTPATH -s'\nalias rmdest='. \$SHORTCUTPATH -r'\nalias ldest='. \$SHORTCUTPATH -l'\nalias copyf='. \$SHORTCUTPATH -c'" >> $SHELLCHOSEN
+        echo -e "\nDone ! aliases installed in $SHELLCHOSEN"
+    else
+        echo -e "\nYou have chosen to not take the aliases package You can still examples in the man"
+    fi
+fi
+
+cp source/shortcut.zsh /home/$(whoami)/.bin/shortcut/shortcut
+echo -e "\nFile source/shortcut.zsh sucessfully copied in /home/$(whoami)/.bin/shortcut/shortcut"
 
 cp -r ressources /home/$(whoami)/.bin/shortcut
+echo -e "\nRepository ./ressources successfully copied in /home/$(whoami)/.bin/shortcut\n"
 
-if [[ $1 == "-R" ]]
-=======
-if [ ! -d /home/$(whoami)/.bin ]
+if ask "Do you want to remove the installation folder after the installation? This will erase ../shortcut";
 then
-    mkdir /home/$(whoami)/.bin
-    mkdir /home/$(whoami)/.bin/shortcut
-elif [ ! -d /home/$(whoami)/.bin/shortcut ]
-then
-    mkdir /home/$(whoami)/.bin/shortcut
-fi
-
-if [[ $1 == "zsh" ]]
-then
-    if [[ -z "$SHORTCUTPATH" ]]
-    then
-        echo -e "\n#shortcut configuration !\n" >> /home/$(whoami)/.zshrc
-
-        echo "if [[ ! \":\$PATH:\" == *\":~/.bin:\"* ]];" >> /home/$(whoami)/.zshrc
-        echo "then" >> /home/$(whoami)/.zshrc
-        echo -e "\texport PATH=~/.bin:\$PATH" >> /home/$(whoami)/.zshrc
-        echo "fi" >> /home/$(whoami)/.zshrc
-
-        echo -e "\nif [[ ! \":\$SHORTCUTPATH:\" == *\":/home/\$(whoami)/.bin/shortcut/shortcut:\"* ]];" >> /home/$(whoami)/.zshrc
-        echo "then" >> /home/$(whoami)/.zshrc
-        echo -e "\texport SHORTCUTPATH=\"/home/\$(whoami)/.bin/shortcut/shortcut\"" >> /home/$(whoami)/.zshrc
-        echo "fi" >> /home/$(whoami)/.zshrc        
-
-        echo -e "\nalias shortcut='. \$SHORTCUTPATH'\nalias goto='. \$SHORTCUTPATH -g'\nalias setdest='. \$SHORTCUTPATH -s'\nalias rmdest='. \$SHORTCUTPATH -r'\nalias ldest='. \$SHORTCUTPATH -l'\nalias copyf='. \$SHORTCUTPATH -c'" >> /home/$(whoami)/.zshrc
-    fi
-    cp source/shortcut.zsh /home/$(whoami)/.bin/shortcut/shortcut
-
-elif [[ $1 == "bash" ]]
-then
-    if [[ -z "$SHORTCUTPATH" ]]
-    then
-        echo -e "\n#shortcut configuration !\n" >> /home/$(whoami)/.bashrc
-
-        echo "if [[ ! \":\$PATH:\" == *\":~/.bin:\"* ]];" >> /home/$(whoami)/.bashrc
-        echo "then" >> /home/$(whoami)/.bashrc
-        echo -e "\texport PATH=~/.bin:\$PATH" >> /home/$(whoami)/.bashrc
-        echo "fi" >> /home/$(whoami)/.bashrc
-
-        echo -e "\nif [[ ! \":\$SHORTCUTPATH:\" == *\":/home/\$(whoami)/.bin/shortcut/shortcut:\"* ]];" >> /home/$(whoami)/.bashrc
-        echo "then" >> /home/$(whoami)/.bashrc
-        echo -e "\texport SHORTCUTPATH=\"/home/\$(whoami)/.bin/shortcut/shortcut\"" >> /home/$(whoami)/.bashrc
-        echo "fi" >> /home/$(whoami)/.bashrc        
-
-        echo -e "\nalias shortcut='. \$SHORTCUTPATH'\nalias goto='. \$SHORTCUTPATH -g'\nalias setdest='. \$SHORTCUTPATH -s'\nalias rmdest='. \$SHORTCUTPATH -r'\nalias ldest='. \$SHORTCUTPATH -l'\nalias copyf='. \$SHORTCUTPATH -c'" >> /home/$(whoami)/.bashrc
-    fi
-    cp source/shortcut.bash /home/$(whoami)/.bin/shortcut/shortcut
-else
-    echo -e "Please put your current shell as an argument ('zsh' or 'bash' required)"
-    exit
-fi
-
-cp -r ressources /home/$(whoami)/.bin/shortcut
-
-if [[ $2 == "-R" ]]
->>>>>>> 51287964f8e7b9aa1610cb44b3828a713ec2e646
-then
+    echo -e "\n\nCleaner on !"
     rm -rf ../shortcut
+else
+    echo -e "\n\nCleaner off !"
 fi
 
 sudo cp ressources/shortcut.1.gz /usr/share/\man/man1
+echo -e "\nshortcut successfully installed\n\nPlease relaunch your terminal or source it\n\nshortcut -h or man shortcut to get info"
 
-<<<<<<< HEAD
-echo -e "shortcut successfully installed\nshortcut -h or man shortcut to get info"
-=======
-echo -e "shortcut successfully installed\nshortcut -h or man shortcut to get info"
->>>>>>> 51287964f8e7b9aa1610cb44b3828a713ec2e646
+devinfo
