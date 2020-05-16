@@ -21,15 +21,15 @@ Here are the most used ones on windows :
 |Debian WSL | :question: WIP | https://www.microsoft.com/fr-fr/p/debian/9msvkqc78pk6#activetab=pivot:overviewtab|
 |Cent OS WSL (not official) | :no_entry: | https://www.microsoft.com/fr-fr/p/centos81/9phx8cs2c9pc?activetab=pivot:overviewtab |
 
-:heavy_check_mark: Means that the WSL is compatible
+:question: It needs to be checked 
 
-:question: Means that it needs to be checked (WSL even if it should be running the same as Windows as some wird dependencies so I prefer to check it myself before giving an aswer)
+(WSL even if it should be running the same as Linux as some weird dependencies so I prefer to check it myself before giving an answer)
 
 :no_entry: For now the only one that I found that was not working with is CentOS WSL (need to check why)
 
 > Note that Cent OS WSL is not an offcial realease 
 
-When you chosed and installed you Linux Subsystem check the shells that are accepted :
+When you chosed and installed your Linux Subsystem check the shells that are accepted :
 
 |Platform   |Compatibility  | INFO |
 |------|-----|-----|
