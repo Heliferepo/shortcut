@@ -46,7 +46,7 @@ When you chosed and installed your Linux Subsystem check the shells that are acc
 |------|-----|
 |Ubuntu && Ubuntu WSL| sudo apt install git|
 |Fedora && Fedora WSL| sudo dnf install git|
-|Arch && Manjaro && Arch WSL | yaourt -S git |
+|Arch && Arch WSL | yaourt -S git |
 |Manjaro | sudo pacman -S git |
 |Gentoo && Funtoo | sudo emerge --ask dev-vcs/git |
 |Snap (Not an OS just a package manager)| sudo snap install git|
