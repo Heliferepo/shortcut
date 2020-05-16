@@ -4,7 +4,7 @@
 
 function find_path
 {
-    pathto=$(grep "^$1:" /home/$(whoami)/.bin/shortcut/ShortcutList)
+    pathto=$(grep "^$1:" /home/$(whoami)/.bin/shortcut/ressources/ShortcutList)
     if [[ $pathto == "" ]]
     then
 	echo -e "\e[31mShortcut $1 doesn't exit\e[0m"
@@ -18,12 +18,12 @@ function find_path
 
 function remove_line
 {
-    sed -i "/^$1:/d" /home/$(whoami)/.bin/shortcut/ShortcutList
+    sed -i "/^$1:/d" /home/$(whoami)/.bin/shortcut/ressources/ShortcutList
 }
 
 if [[ $1 == "" ]]
 then
-    cat /home/$(whoami)/.bin/shortcut/ShortcutUsage
+    cat /home/$(whoami)/.bin/shortcut/ressources/ShortcutUsage
 else
     while [[ $1 != "" ]]
     do
@@ -42,12 +42,12 @@ else
 		;;
 
 	    "-s" | "--set")
-		grep $2 /home/$(whoami)/.bin/shortcut/ShortcutList > /dev/null
+		grep $2 /home/$(whoami)/.bin/shortcut/ressources/ShortcutList > /dev/null
 		if [[ $? == 0 ]]
 		then
 		    remove_line $2
 		fi
-		echo "$2:"$(pwd) >> /home/$(whoami)/.bin/shortcut/ShortcutList
+		echo "$2:"$(pwd) >> /home/$(whoami)/.bin/shortcut/ressources/ShortcutList
 		shift
 		;;
 
@@ -57,11 +57,11 @@ else
 		;;
 
 	    "-l" | "--list")
-		cat /home/$(whoami)/.bin/shortcut/ShortcutList
+		cat /home/$(whoami)/.bin/shortcut/ressources/ShortcutList
 		;;
 
 	    "-h" | "--help")
-		cat /home/$(whoami)/.bin/shortcut/ShortcutUsage
+		cat /home/$(whoami)/.bin/shortcut/ressources/ShortcutUsage
 		;;
 
 	    \?)

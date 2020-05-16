@@ -6,6 +6,7 @@ then
     exit
 fi
 
+<<<<<<< HEAD
 if [[ $SHELL == /usr/bin/zsh ]]
 then
     if [[ -z "$SHORTCUTPATH" ]]
@@ -37,10 +38,72 @@ fi
 cp -r ressources /home/$(whoami)/.bin/shortcut
 
 if [[ $1 == "-R" ]]
+=======
+if [ ! -d /home/$(whoami)/.bin ]
+then
+    mkdir /home/$(whoami)/.bin
+    mkdir /home/$(whoami)/.bin/shortcut
+elif [ ! -d /home/$(whoami)/.bin/shortcut ]
+then
+    mkdir /home/$(whoami)/.bin/shortcut
+fi
+
+if [[ $1 == "zsh" ]]
+then
+    if [[ -z "$SHORTCUTPATH" ]]
+    then
+        echo -e "\n#shortcut configuration !\n" >> /home/$(whoami)/.zshrc
+
+        echo "if [[ ! \":\$PATH:\" == *\":~/.bin:\"* ]];" >> /home/$(whoami)/.zshrc
+        echo "then" >> /home/$(whoami)/.zshrc
+        echo -e "\texport PATH=~/.bin:\$PATH" >> /home/$(whoami)/.zshrc
+        echo "fi" >> /home/$(whoami)/.zshrc
+
+        echo -e "\nif [[ ! \":\$SHORTCUTPATH:\" == *\":/home/\$(whoami)/.bin/shortcut/shortcut:\"* ]];" >> /home/$(whoami)/.zshrc
+        echo "then" >> /home/$(whoami)/.zshrc
+        echo -e "\texport SHORTCUTPATH=\"/home/\$(whoami)/.bin/shortcut/shortcut\"" >> /home/$(whoami)/.zshrc
+        echo "fi" >> /home/$(whoami)/.zshrc        
+
+        echo -e "\nalias shortcut='. \$SHORTCUTPATH'\nalias goto='. \$SHORTCUTPATH -g'\nalias setdest='. \$SHORTCUTPATH -s'\nalias rmdest='. \$SHORTCUTPATH -r'\nalias ldest='. \$SHORTCUTPATH -l'\nalias copyf='. \$SHORTCUTPATH -c'" >> /home/$(whoami)/.zshrc
+    fi
+    cp source/shortcut.zsh /home/$(whoami)/.bin/shortcut/shortcut
+
+elif [[ $1 == "bash" ]]
+then
+    if [[ -z "$SHORTCUTPATH" ]]
+    then
+        echo -e "\n#shortcut configuration !\n" >> /home/$(whoami)/.bashrc
+
+        echo "if [[ ! \":\$PATH:\" == *\":~/.bin:\"* ]];" >> /home/$(whoami)/.bashrc
+        echo "then" >> /home/$(whoami)/.bashrc
+        echo -e "\texport PATH=~/.bin:\$PATH" >> /home/$(whoami)/.bashrc
+        echo "fi" >> /home/$(whoami)/.bashrc
+
+        echo -e "\nif [[ ! \":\$SHORTCUTPATH:\" == *\":/home/\$(whoami)/.bin/shortcut/shortcut:\"* ]];" >> /home/$(whoami)/.bashrc
+        echo "then" >> /home/$(whoami)/.bashrc
+        echo -e "\texport SHORTCUTPATH=\"/home/\$(whoami)/.bin/shortcut/shortcut\"" >> /home/$(whoami)/.bashrc
+        echo "fi" >> /home/$(whoami)/.bashrc        
+
+        echo -e "\nalias shortcut='. \$SHORTCUTPATH'\nalias goto='. \$SHORTCUTPATH -g'\nalias setdest='. \$SHORTCUTPATH -s'\nalias rmdest='. \$SHORTCUTPATH -r'\nalias ldest='. \$SHORTCUTPATH -l'\nalias copyf='. \$SHORTCUTPATH -c'" >> /home/$(whoami)/.bashrc
+    fi
+    cp source/shortcut.bash /home/$(whoami)/.bin/shortcut/shortcut
+else
+    echo -e "Please put your current shell as an argument ('zsh' or 'bash' required)"
+    exit
+fi
+
+cp -r ressources /home/$(whoami)/.bin/shortcut
+
+if [[ $2 == "-R" ]]
+>>>>>>> 51287964f8e7b9aa1610cb44b3828a713ec2e646
 then
     rm -rf ../shortcut
 fi
 
 sudo cp ressources/shortcut.1.gz /usr/share/\man/man1
 
+<<<<<<< HEAD
 echo -e "shortcut successfully installed\nshortcut -h or man shortcut to get info"
+=======
+echo -e "shortcut successfully installed\nshortcut -h or man shortcut to get info"
+>>>>>>> 51287964f8e7b9aa1610cb44b3828a713ec2e646
