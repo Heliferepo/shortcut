@@ -100,6 +100,8 @@ echo -e "\nFile source/shortcut.zsh sucessfully copied in /home/$(whoami)/.bin/s
 cp -r ressources /home/$(whoami)/.bin/shortcut
 echo -e "\nRepository ./ressources successfully copied in /home/$(whoami)/.bin/shortcut\n"
 
+sudo cp ressources/shortcut.1.gz /usr/share/\man/man1
+
 if ask "Do you want to remove the installation folder after the installation? This will erase ../shortcut";
 then
     echo -e "\n\nCleaner on !"
@@ -108,7 +110,6 @@ else
     echo -e "\n\nCleaner off !"
 fi
 
-sudo cp ressources/shortcut.1.gz /usr/share/\man/man1
 echo -e "\nshortcut successfully installed\n\nPlease relaunch your terminal or source it\n\nshortcut -h or man shortcut to get info"
 
 devinfo
