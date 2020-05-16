@@ -19,14 +19,39 @@ if [[ $1 == "zsh" ]]
 then
     if [[ -z "$SHORTCUTPATH" ]]
     then
-        echo -e "\nexport PATH=\$PATH:~/.bin\nexport SHORTCUTPATH=\"/home/\$(whoami)/.bin/shortcut/shortcut\"\nalias shortcut='. \$SHORTCUTPATH'\nalias goto='. \$SHORTCUTPATH -g'\nalias setdest='. \$SHORTCUTPATH -s'\nalias rmdest='. \$SHORTCUTPATH -r'\nalias ldest='. \$SHORTCUTPATH -l'\nalias copyf='. \$SHORTCUTPATH -c'" >> /home/$(whoami)/.zshrc
+        echo -e "\n#shortcut configuration !\n" >> /home/$(whoami)/.zshrc
+
+        echo "if [[ ! \":\$PATH:\" == *\":~/.bin:\"* ]];" >> /home/$(whoami)/.zshrc
+        echo "then" >> /home/$(whoami)/.zshrc
+        echo -e "\texport PATH=~/.bin:\$PATH" >> /home/$(whoami)/.zshrc
+        echo "fi" >> /home/$(whoami)/.zshrc
+
+        echo -e "\nif [[ ! \":\$SHORTCUTPATH:\" == *\":/home/\$(whoami)/.bin/shortcut/shortcut:\"* ]];" >> /home/$(whoami)/.zshrc
+        echo "then" >> /home/$(whoami)/.zshrc
+        echo -e "\texport SHORTCUTPATH=\"/home/\$(whoami)/.bin/shortcut/shortcut\"" >> /home/$(whoami)/.zshrc
+        echo "fi" >> /home/$(whoami)/.zshrc        
+
+        echo -e "\nalias shortcut='. \$SHORTCUTPATH'\nalias goto='. \$SHORTCUTPATH -g'\nalias setdest='. \$SHORTCUTPATH -s'\nalias rmdest='. \$SHORTCUTPATH -r'\nalias ldest='. \$SHORTCUTPATH -l'\nalias copyf='. \$SHORTCUTPATH -c'" >> /home/$(whoami)/.zshrc
     fi
     cp source/shortcut.zsh /home/$(whoami)/.bin/shortcut/shortcut
+
 elif [[ $1 == "bash" ]]
 then
     if [[ -z "$SHORTCUTPATH" ]]
     then
-        echo -e "\nexport PATH=\$PATH:~/.bin\nexport SHORTCUTPATH=\"/home/\$(whoami)/.bin/shortcut/shortcut\"\nalias shortcut='. \$SHORTCUTPATH'\nalias goto='. \$SHORTCUTPATH -g'\nalias setdest='. \$SHORTCUTPATH -s'\nalias rmdest='. \$SHORTCUTPATH -r'\nalias ldest='. \$SHORTCUTPATH -l'\nalias copyf='. \$SHORTCUTPATH -c'" >> /home/$(whoami)/.bashrc
+        echo -e "\n#shortcut configuration !\n" >> /home/$(whoami)/.bashrc
+
+        echo "if [[ ! \":\$PATH:\" == *\":~/.bin:\"* ]];" >> /home/$(whoami)/.bashrc
+        echo "then" >> /home/$(whoami)/.bashrc
+        echo -e "\texport PATH=~/.bin:\$PATH" >> /home/$(whoami)/.bashrc
+        echo "fi" >> /home/$(whoami)/.bashrc
+
+        echo -e "\nif [[ ! \":\$SHORTCUTPATH:\" == *\":/home/\$(whoami)/.bin/shortcut/shortcut:\"* ]];" >> /home/$(whoami)/.bashrc
+        echo "then" >> /home/$(whoami)/.bashrc
+        echo -e "\texport SHORTCUTPATH=\"/home/\$(whoami)/.bin/shortcut/shortcut\"" >> /home/$(whoami)/.bashrc
+        echo "fi" >> /home/$(whoami)/.bashrc        
+
+        echo -e "\nalias shortcut='. \$SHORTCUTPATH'\nalias goto='. \$SHORTCUTPATH -g'\nalias setdest='. \$SHORTCUTPATH -s'\nalias rmdest='. \$SHORTCUTPATH -r'\nalias ldest='. \$SHORTCUTPATH -l'\nalias copyf='. \$SHORTCUTPATH -c'" >> /home/$(whoami)/.bashrc
     fi
     cp source/shortcut.bash /home/$(whoami)/.bin/shortcut/shortcut
 else
