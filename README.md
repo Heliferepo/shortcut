@@ -41,5 +41,6 @@ cd shortcut
 ```
 
 ```sh
-./installer [zsh] or [bash]
+./installer
 ```
+Now Follow the steps of the installer
