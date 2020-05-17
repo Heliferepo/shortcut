@@ -25,8 +25,7 @@ Here are the most used ones on windows :
 
 (WSL even if it should be running the same as Linux as some weird dependencies so I prefer to check it myself before giving an answer)
 
-:no_entry: For now the only one that I found that was not working with is CentOS WSL (need to check why)
-
+:no_entry: For now the only one that I found that was not working with is CentOS WSL
 > Note that Cent OS WSL is not an offcial realease 
 
 When you chosed and installed your Linux Subsystem check the shells that are accepted :
