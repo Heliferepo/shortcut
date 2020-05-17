@@ -1,7 +1,7 @@
 #!/bin/sh
 function devinfo {
     echo -e "\nThis project was initiated by DregniSlovra : https://github.com/DregniSlovra"
-    echo -e "\nContributors:\nHelife : https://github.com/Heliferepo"
+    echo -e "\nContributors:\nDregniSlovra : https://github.com/DregniSlovra\nHelifie: https://github.com/Heliferepo"
     echo -e "\nIf you have an issue with shortcut please open an issue in : https://github.com/DregniSlovra/shortcut/issues"
     echo -e "\nThank you for installing our script"
 }
@@ -59,43 +59,24 @@ then
     mkdir /home/$(whoami)/.bin/shortcut
     echo -e "\nCreated direcotry /home/$(whoami)/.bin"
     echo -e "\nCreated direcotry /home/$(whoami)/.bin/shortcut"
-
 elif [ ! -d /home/$(whoami)/.bin/shortcut ]
 then
     mkdir /home/$(whoami)/.bin/shortcut
     echo -e "\nCreated directory /home/$(whoami)/.bin/shortcut"
 fi
 
-if [[ -z "$SHORTCUTPATH" ]]
+if ask "Do you want the premade aliases ? They are pretty recommended"
 then
-    echo -e "\n#shortcut configuration !\n" >> $SHELLCHOSEN
-
-    echo "if [[ ! \":\$PATH:\" == *\":~/.bin:\"* ]];" >> $SHELLCHOSEN
-    echo "then" >> $SHELLCHOSEN
-    echo -e "\texport PATH=~/.bin:\$PATH" >> $SHELLCHOSEN
-    echo "fi" >> $SHELLCHOSEN
-
-    echo -e "\nShortcut intiliased to the \$PATH variable"
-
-    echo -e "\nif [[ ! \":\$SHORTCUTPATH:\" == *\":/home/\$(whoami)/.bin/shortcut/shortcut:\"* ]];" >> $SHELLCHOSEN
-    echo "then" >> $SHELLCHOSEN
-    echo -e "\texport SHORTCUTPATH=\"/home/\$(whoami)/.bin/shortcut/shortcut\"" >> $SHELLCHOSEN
-    echo "fi" >> $SHELLCHOSEN
-
-    echo -e "\n\$SHORTCUT intiliased as /home/$(whoami)/.bin/shortcut/shortcut\n"
-
-    if ask "Do you want the premade aliases ? They are pretty recommended"
-    then
-        echo -e "\n\nAdding aliases..."
-        echo -e "\nalias shortcut='. \$SHORTCUTPATH'\nalias goto='. \$SHORTCUTPATH -g'\nalias setdest='. \$SHORTCUTPATH -s'\nalias rmdest='. \$SHORTCUTPATH -r'\nalias ldest='. \$SHORTCUTPATH -l'\nalias copyf='. \$SHORTCUTPATH -c'" >> $SHELLCHOSEN
-        echo -e "\nDone ! aliases installed in $SHELLCHOSEN"
-    else
-        echo -e "\nYou have chosen to not take the aliases package You can still examples in the man"
-    fi
+    echo -e "\n\nAdding aliases..."
+    echo -e "\n#SHORTCUT ALIASES"
+    echo -e "\nalias shortcut='. shortcut'\nalias goto='. shortcut -g'\nalias setdest='. shortcut -s'\nalias rmdest='. shortcut -r'\nalias ldest='. shortcut -l'\nalias copyf='. shortcut -c'" >> $SHELLCHOSEN
+    echo -e "\nDone ! aliases installed in $SHELLCHOSEN"
+else
+    echo -e "\nYou have chosen to not take the aliases package You can still examples in the man"
 fi
 
-cp $FILETOCOPY  /home/$(whoami)/.bin/shortcut/shortcut
-echo -e "\nFile source/shortcut.zsh sucessfully copied in /home/$(whoami)/.bin/shortcut/shortcut"
+sudo cp $FILETOCOPY  /usr/bin/shortcut
+echo -e "\nExecutable sucessfully copied in /usr/bin/shortcut"
 
 cp -r ressources /home/$(whoami)/.bin/shortcut
 echo -e "\nRepository ./ressources successfully copied in /home/$(whoami)/.bin/shortcut\n"
