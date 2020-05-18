@@ -1,18 +1,19 @@
 #!/bin/sh
-function devinfo {
+
+devinfo() {
     echo -e "\nThis project was initiated by DregniSlovra : https://github.com/DregniSlovra"
     echo -e "\nContributors:\nDregniSlovra : https://github.com/DregniSlovra\nHelife: https://github.com/Heliferepo"
     echo -e "\nIf you have an issue with shortcut please open an issue in : https://github.com/DregniSlovra/shortcut/issues"
     echo -e "\nThank you for installing our script"
 }
 
-function ask {
+ask() {
     local prompt reply default
     prompt="y/n"
     default="y"
     while true; do
       echo -n "$1 [$prompt] "
-        read -n1 reply </dev/tty
+        read reply </dev/tty
         if [ -z "$reply" ]; then
             reply=$default
         fi
@@ -24,7 +25,7 @@ function ask {
     done
 }
 
-function choseshell {
+choseshell() {
     local n
     echo "Here are the differents compatible shells aviable"
     echo "0) Abort"
@@ -33,7 +34,7 @@ function choseshell {
     echo "3) zsh"
 
     echo -n "Your choice : "
-    read -n1 n </dev/tty
+    read n </dev/tty
     case $n in
         0) echo -e "\nYou aborted" && exit;;
         1) SHELLCHOSEN=/home/$(whoami)/.bashrc && FILETOCOPY=\source/shortcut.bash && echo -e"\nYou have chosen the bash shell";;
@@ -43,7 +44,7 @@ function choseshell {
     esac
 }
 
-if [ 'whoami' == "root" ]
+if [ $EUID == 0 ]
 then
     echo "Please do not run as root directly"
     exit
