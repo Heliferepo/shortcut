@@ -25,12 +25,12 @@ if [[ $1 == "" ]]
 then
     cat /home/$(whoami)/.bin/shortcut/ressources/ShortcutUsage
 else
-    while [[ $1 != "" ]]
-    if [ ! "$PS1" ] ;
+	if [ ! "$PS1" ] ;
     then
         echo -e "\e[31mThe script is not sourced right now please you the command like that : . shortcut [argument]\e[0m"
         exit
     fi
+    while [[ $1 != "" ]]
     do
 	case $1 in
 
