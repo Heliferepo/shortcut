@@ -1,7 +1,7 @@
 #!/bin/sh
 function devinfo {
     echo -e "\nThis project was initiated by DregniSlovra : https://github.com/DregniSlovra"
-    echo -e "\nContributors:\nDregniSlovra : https://github.com/DregniSlovra\nHelifie: https://github.com/Heliferepo"
+    echo -e "\nContributors:\nDregniSlovra : https://github.com/DregniSlovra\nHelife: https://github.com/Heliferepo"
     echo -e "\nIf you have an issue with shortcut please open an issue in : https://github.com/DregniSlovra/shortcut/issues"
     echo -e "\nThank you for installing our script"
 }
