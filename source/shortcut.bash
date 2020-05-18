@@ -69,7 +69,7 @@ else
 		cat /home/$(whoami)/.bin/shortcut/ressources/ShortcutUsage
 		;;
 
-	    \?)
+	    *)
 		echo -e "\e[31mInvalid option : -$1\e[0m"
 		return 0
 		;;
