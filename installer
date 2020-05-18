@@ -36,9 +36,9 @@ function choseshell {
     read -n1 n </dev/tty
     case $n in
         0) echo -e "\nYou aborted" && exit;;
-        1) SHELLCHOSEN=/home/$(whoami)/.bashrc && echo -e "\nYou have chosen the bash shell";;
-        2) SHELLCHOSEN=/home/$(whoami)/.kshrc && echo -e "\nYou have chosen the ksh shell";;
-        3) SHELLCHOSEN=/home/$(whoami)/.zshrc && echo -e "\nYou have chosen the Z shell";;
+        1) SHELLCHOSEN=/home/$(whoami)/.bashrc && FILETOCOPY=\source/shortcut.bash && echo -e"\nYou have chosen the bash shell";;
+        2) SHELLCHOSEN=/home/$(whoami)/.kshrc &&  FILETOCOPY=\source/shortcut.bash && echo -e "\nYou have chosen the ksh shell";;
+        3) SHELLCHOSEN=/home/$(whoami)/.zshrc && FILETOCOPY=\source/shortcut.zsh &&echo -e "\nYou have chosen the Z shell";;
         *) echo -e "\nNot a choice considered as aborted" && exit
     esac
 }
@@ -94,7 +94,7 @@ then
     fi
 fi
 
-cp source/shortcut.zsh /home/$(whoami)/.bin/shortcut/shortcut
+cp $FILETOCOPY  /home/$(whoami)/.bin/shortcut/shortcut
 echo -e "\nFile source/shortcut.zsh sucessfully copied in /home/$(whoami)/.bin/shortcut/shortcut"
 
 cp -r ressources /home/$(whoami)/.bin/shortcut
