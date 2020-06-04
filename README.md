@@ -13,20 +13,22 @@ Shortcut is not made to be used on Windows default cmd or powershell so you need
 
 Here are the most used ones on windows :
 
-|Platform   |Compatibility  | URL |
-|------|-----|-----|
-|Ubuntu WSL (in general) | :heavy_check_mark: | https://www.microsoft.com/fr-fr/p/ubuntu-2004-lts/9n6svws3rx71?cid=msft_web_chart&activetab=pivot:overviewtab |
-|Fedora Remix for WSL | :heavy_check_mark: | https://www.microsoft.com/fr-fr/p/fedora-remix-for-wsl/9n6gdm4k2hnc?cid=msft_web_chart&activetab=pivot:overviewtab
-|Kali WSL| :question: WIP | https://www.microsoft.com/fr-fr/p/kali-linux/9pkr34tncv07?activetab=pivot:overviewtab |
-|Debian WSL | :question: WIP | https://www.microsoft.com/fr-fr/p/debian/9msvkqc78pk6#activetab=pivot:overviewtab|
-|Cent OS WSL (not official) | :no_entry: | https://www.microsoft.com/fr-fr/p/centos81/9phx8cs2c9pc?activetab=pivot:overviewtab |
+|Platform   |Compatibility 
+|------|-----|
+|Ubuntu WSL (in general) | :heavy_check_mark: |
+|Fedora Remix for WSL | :heavy_check_mark: |
+|Kali WSL| :question: WIP |
+|Debian WSL | :question: WIP |
+|Cent OS WSL (not official) | :no_entry: |
 
 :question: It needs to be checked 
 
 (WSL even if it should be running the same as Linux, WSL has some weird dependencies so I prefer to check it myself before giving an answer)
 
 :no_entry: For now the only one that I found that was not working with is CentOS WSL
-> Note that Cent OS WSL is not an offcial realease 
+> Note : Please know that Cent OS WSL is not an offcial realease 
+
+:computer: All the tests on WSL have been made on bash
 
 When you chosed and installed your Linux Subsystem check the shells that are accepted :
 
