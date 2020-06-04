@@ -23,19 +23,19 @@ Here are the most used ones on windows :
 
 :question: It needs to be checked 
 
-(WSL even if it should be running the same has Linux as some weird dependencies so I prefer to check it myself before giving an answer)
+(WSL even if it should be running the same as Linux, WSL has some weird dependencies so I prefer to check it myself before giving an answer)
 
 :no_entry: For now the only one that I found that was not working with is CentOS WSL
 > Note that Cent OS WSL is not an offcial realease 
 
 When you chosed and installed your Linux Subsystem check the shells that are accepted :
 
-|Platform   |Compatibility  | INFO |
-|------|-----|-----|
-|bash | :heavy_check_mark: | bash is by default on every linux system and sub system|
-|ksh  | :heavy_check_mark: | csh is basically an another version of bash (full bash compatibility) |
-|zsh  | :heavy_check_mark: | It's considered as a better version of bash|
-|csh  | :no_entry: (WIP) | I did not do anything yet about csh (more to come) | 
+|Platform   |Compatibility  |
+|------|-----|
+|bash | :heavy_check_mark: |
+|ksh  | :heavy_check_mark: |
+|zsh  | :heavy_check_mark: | 
+|csh  | :no_entry: (WIP) | 
 
 > Note : script was made originally on zsh 
 
